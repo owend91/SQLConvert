@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+function formatForEclipse() {
+  var lines = document.getElementById('sql').value.split('\n');
+  var newString = "";
+	for(var i = 0;i < lines.length;i++){
+		if(i == lines.length - 1) {
+			newString += '\"' + lines[i] + '\" ;'; 		
+		} else {
+			newString += '\"' + lines[i] + ' \" + \n'; 		
+		}
+		
+	}
+	document.getElementById("str").value = newString;
+}
+
+function formatForOracle() {
+  var lines = document.getElementById('str').value.split('\n');
+  var newString = "";
+
+	document.getElementById("sql").value = document.getElementById('str').value.replace(/['"]+/g,'').replace(/['+]/g,'');
+}
+</script>
+<html>
+
+<head>
+<title>Convert</title>
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+<div class="col-sm-1"></div>
+<div class="col-sm-5">
+<h3>Oracle Format: </h3>
+<form>
+<textarea name="sql" id = "sql" rows="15" cols="50"> </textarea>
+<input type="button" value="Format for Eclipse" class="btn btn-info" onclick="formatForEclipse()">
+</form>
+</div>
+<div class="col-sm-5">
+<h3>Eclipse Format: </h3>
+<form>
+<textarea name="str" id = "str" rows="15" cols="50"> </textarea>
+<input type="button" value="Format for Oracle" class="btn btn-info" onclick="formatForOracle()">
+</form>
+</div>
+<div class="col-sm-1"></div>
+</div>
+</div>
+</body>
+
+</html>
