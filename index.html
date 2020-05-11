@@ -23,10 +23,44 @@ function formatForEclipse() {
 }
 
 function formatForOracle() {
-  var lines = document.getElementById('str').value.split('\n');
+ var lines = document.getElementById('str').value.split('\n');
   var newString = "";
+  for(var i = 0;i < lines.length;i++){
+		if(i == lines.length - 1) {
+			var spaces = 0;
+			if(spaces = lines[i].match(/^\s+/) == null) {
+				spaces = 0;
+			} else {
+				spaces = lines[i].match(/^\s+/)[0].length;
+			}
+			var line = lines[i].trim();
+			var newLine = '';
+			for(var j = 0; j < spaces; j++){
+				newLine += ' ';
+			}
+			line = line.substring(0, line.length - 1).replace(/["]+/g,'');
+			newLine += line;
+			newString +=  newLine + ';'; 		
+		} else {
+			var spaces = 0;
+			if(spaces = lines[i].match(/^\s+/) == null) {
+				spaces = 0;
+			} else {
+				spaces = lines[i].match(/^\s+/)[0].length;
+			}
+			var line = lines[i].trim();
+			var newLine = '';
+			for(var j = 0; j < spaces; j++){
+				newLine += ' ';
+			}
+			line = line.substring(0, line.length - 1).replace(/["]+/g,'');
+			newLine += line;
+			newString +=  newLine + '\n'; 		
+		}
+		
+	}
 
-	document.getElementById("sql").value = document.getElementById('str').value.replace(/['"]+/g,'').replace(/['+]/g,'');
+	document.getElementById("sql").value = newString;
 }
 </script>
 <html>
